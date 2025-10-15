@@ -1,0 +1,39 @@
+# =====================================================
+# CONFIGURAÇÃO RÁPIDA DO BANCO DE DADOS
+# =====================================================
+#
+# Este arquivo mostra onde editar o código para configurar
+# o nome do banco de dados antes de gerar o executável.
+#
+# LOCALIZAÇÃO NO CÓDIGO: consulta_fiscal.py
+# FUNÇÃO: conectar_banco()
+# LINHA APROXIMADA: 15
+#
+# =====================================================
+
+# O QUE VOCÊ PRECISA AJUSTAR:
+
+database = 'SEU_BANCO'   # ⬅️ ALTERE AQUI para o nome do seu banco de dados
+                         # Exemplo: database = 'VendasDB'
+                         # Exemplo: database = 'Estoque2024'
+
+# OBSERVAÇÕES:
+# 
+# ✅ O SERVIDOR (nome do PC) é detectado AUTOMATICAMENTE
+# ✅ Você NÃO precisa configurar o nome do servidor
+# ✅ Por padrão usa Autenticação do Windows
+# 
+# Se precisar usar usuário e senha SQL Server:
+# 1. Edite também as linhas username e password
+# 2. Comente a linha com "Trusted_Connection=yes"
+# 3. Descomente a linha com "UID={username};PWD={password}"
+
+# =====================================================
+# EXEMPLO DE CONFIGURAÇÃO COMPLETA:
+# =====================================================
+
+# Para usar com nome do banco "MinhaEmpresaDB":
+database = 'MinhaEmpresaDB'
+
+# O servidor será automaticamente o nome do computador onde o .exe for executado
+# Exemplo: Se o PC se chama "CAIXA01", o servidor será "CAIXA01"
