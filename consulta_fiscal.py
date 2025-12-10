@@ -23,13 +23,13 @@ def conectar_banco():
         
         print(f"Tentando conectar ao servidor: {server}")
         print(f"Banco de dados: {database}")
-        
-        # Opção 1: Autenticação do Windows (recomendado)
-        # connection_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
-        
-        # Opção 2: Autenticação SQL Server (descomente as linhas abaixo e comente a linha acima)
+
+        # Opção 1: Autenticação SQL Server
         connection_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
-        
+          
+        # Opção 2: Autenticação do Windows
+        # connection_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
+      
         conn = pyodbc.connect(connection_string)
         print("✓ Conexão estabelecida com sucesso!")
         return conn
@@ -182,6 +182,35 @@ WHERE (desativado = 0 or desativado is null)
 'MATERIAIS DE USO',
 'MATERIAIS DE USO E CONSUMO')
 
+AND SUBGRUPO NOT IN ('ALIMENTO FUNCIONARIOS',
+'EQUIPAMENTOS',
+'ESTOQUE',
+'ESTOQUE INSUMOS',
+'HIGIENE E LIMPEZA',
+'IMOBILIZADO',
+'INSUMO',
+'INSUMOS',
+'LIMPEZA',
+'MATERIA PRIMA',
+'MATERIAL DE EXPEDIENTE',
+'MATERIAL DE LIMPEZA',
+'MATERIAL DE USO',
+'MATERIAL DE USO E CONSUMO',
+'MATERIAL EMBALAGEM',
+'MATERIAL SECUNDARIO',
+'PROCESSADOS',
+'PROCESSOS',
+'PRODUCOES',
+'SUBPRODUTO',
+'UNIFORME FUNCIONARIOS',
+'UNIFORME',
+'USO E CONSUMO',
+'MAQUINAS E EQUIPAMENTOS',
+'FICHA TECNICA',
+'MATERIAIS DE EXPEDIENTE',
+'MATERIAIS DE LIMPEZA',
+'MATERIAIS DE USO',
+'MATERIAIS DE USO E CONSUMO')
 
 ORDER BY e.cod_ncm, cod_cest
 

@@ -1,5 +1,0 @@
-# Versão minimalista - instala as últimas versões compatíveis
-pyodbc
-pandas
-openpyxl
-pyinstaller

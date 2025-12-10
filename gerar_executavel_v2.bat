@@ -38,7 +38,7 @@ echo ============================================
 echo Isso pode levar alguns minutos...
 echo.
 
-pyinstaller --onefile --console --icon=NONE --name="Relatorio_Fiscal" consulta_fiscal.py
+python -m PyInstaller --onefile --console --icon=NONE --name="Relatorio_Fiscal" consulta_fiscal.py
 
 if %errorlevel% neq 0 (
     echo.
@@ -47,7 +47,7 @@ if %errorlevel% neq 0 (
     echo ============================================
     echo.
     echo Tente executar manualmente:
-    echo pyinstaller --onefile --console --name="Relatorio_Fiscal" consulta_fiscal.py
+    echo python -m PyInstaller --onefile --console --name="Relatorio_Fiscal" consulta_fiscal.py
     echo.
     pause
     exit /b 1

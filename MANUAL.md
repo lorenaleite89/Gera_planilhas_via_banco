@@ -5,14 +5,8 @@
 - Windows 7 ou superior
 - Python 3.8 ou superior instalado (APENAS para gerar o executável)
 - SQL Server instalado no computador
-- Driver ODBC do SQL Server instalado
-- Permissões de escrita na área de trabalho
-
-## ✨ NOVIDADE: DETECÇÃO AUTOMÁTICA DO SERVIDOR
-
-O executável agora detecta **automaticamente** o nome do computador e usa como servidor SQL.
-
-**Você NÃO precisa mais configurar o servidor!**
+- Driver ODBC do SQL Server instalado ([Download aqui](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server))
+- Permissões de escrita na pasta C:/MHI
 
 ## 🔧 PASSO 1: INSTALAÇÃO DAS DEPENDÊNCIAS (Apenas para gerar o .exe)
 
@@ -23,42 +17,27 @@ O executável agora detecta **automaticamente** o nome do computador e usa como 
    pip install -r requirements.txt
    ```
 
-## ⚙️ PASSO 2: CONFIGURAÇÃO DO BANCO DE DADOS
-
-Abra o arquivo `consulta_fiscal.py` em um editor de texto e localize a função `conectar_banco()` (linha ~15).
-
-**Você só precisa ajustar UMA linha:**
-
-```python
-database = 'SEU_BANCO'   # ⬅️ Altere para o nome do seu banco de dados
-```
-
-**Exemplo:**
-```python
-database = 'VendasDB'
-# ou
-database = 'Estoque2024'
-```
-
-### ✅ O que é detectado automaticamente:
+### ✅ Configuração do servidor
 - **Servidor**: Nome do computador (via variável de ambiente COMPUTERNAME)
-- **Autenticação**: Windows Authentication (Trusted_Connection)
+- **Nome do banco de dados**: MISTERCHEFNET
 
 ### Opções de Autenticação:
 
-**Opção 1 - Autenticação do Windows (Padrão - Recomendado):**
-```python
-connection_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
-```
-✅ Esta opção já está ativa por padrão
-
-**Opção 2 - Autenticação SQL Server:**
+**Opção 1 - Autenticação SQL Server (Padrão - Recomendado):**
 Se precisar usar usuário e senha:
 1. Configure username e password
 2. Comente a linha com `Trusted_Connection=yes`
 3. Descomente a linha:
 ```python
 connection_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
+```
+✅ Esta opção já está ativa por padrão
+
+**Opção 1 - Autenticação do Windows:**
+1. Comente a linha da Opção 1
+2. Descomente a linha:
+```python
+connection_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
 ```
 
 ## 🚀 PASSO 3: GERAR O EXECUTÁVEL (.EXE)
@@ -85,29 +64,29 @@ O arquivo `Relatorio_Fiscal.exe` pode ser copiado para qualquer computador Windo
 ## 📝 COMO USAR O EXECUTÁVEL
 
 1. Copie o arquivo `Relatorio_Fiscal.exe` para o computador
-2. Execute o arquivo (duplo clique)
+2. Execute o arquivo como Administrador
 3. O programa irá:
    - ✅ Detectar automaticamente o nome do PC
    - ✅ Conectar ao SQL Server local usando o nome do PC
    - ✅ Executar as duas consultas SQL
-   - ✅ Gerar um arquivo Excel na área de trabalho
+   - ✅ Gerar um arquivo Excel na pasta C:/MHI
    - ✅ Nomear como: `[Nome da Loja] - [CNPJ].xlsx`
 
 4. O arquivo Excel conterá duas abas:
    - **REGRAS FISCAIS**: Resultado da primeira consulta
    - **CADASTRO DE PRODUTOS**: Resultado da segunda consulta
 
-## 🔍 EXEMPLO DE FUNCIONAMENTO
-
-Se o executável for executado em um PC chamado **"CAIXA01"**:
-- Servidor detectado: `CAIXA01`
-- String de conexão: `DRIVER={SQL Server};SERVER=CAIXA01;DATABASE=SeuBanco;Trusted_Connection=yes;`
-
-Se o executável for executado em um PC chamado **"NOTEBOOK-LOJA"**:
-- Servidor detectado: `NOTEBOOK-LOJA`
-- String de conexão: `DRIVER={SQL Server};SERVER=NOTEBOOK-LOJA;DATABASE=SeuBanco;Trusted_Connection=yes;`
-
 ## ⚠️ SOLUÇÃO DE PROBLEMAS
+
+### ✗ Erro: Uma ou mais consultas falharam.
+Se após executar o programa, retornar o seguinte erro:
+
+```': ('21000', '[21000] [Microsoft][ODBC SQL Server Driver][SQL Server]Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression. (512) (SQLExecDirectW)')
+```
+
+Significa que existem produtos de mais de uma loja no banco de dados.
+Nesse caso, é necessário deletar os registros da loja que não correponde à licença autenticada. Delete também das tabelas [Grupo Subgrupo], [Composições] e [Adicionais].
+
 
 ### Erro: "Nome do servidor inválido"
 **Causa**: SQL Server não está instalado no computador local
@@ -125,7 +104,7 @@ Instale o driver ODBC do SQL Server:
 - Baixe em: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
 - Instale a versão 17 ou superior
 
-### Arquivo não é salvo na área de trabalho:
+### Arquivo não é salvo na pasta:
 - Verifique as permissões de escrita
 - Execute o programa como Administrador
 

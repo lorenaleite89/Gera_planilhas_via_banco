@@ -5,23 +5,17 @@
 ✅ **Executável standalone** - Funciona em qualquer Windows (com ou sem Python)  
 ✅ **Detecção automática do servidor** - Usa o nome do PC automaticamente  
 ✅ **Simples de configurar** - Apenas ajuste o nome do banco de dados  
-✅ **Gera Excel automaticamente** - Salva na área de trabalho  
+✅ **Gera Excel automaticamente** - Salva na pasta C:/MHI  
 
 ---
 
 ## ⚡ INÍCIO RÁPIDO
 
-### PASSO 1: Configure o banco de dados
-Abra `consulta_fiscal.py` e edite a linha 15:
-```python
-database = 'SEU_BANCO'  # ⬅️ Coloque o nome do seu banco aqui
-```
-
-### PASSO 2: Gere o executável
+### PASSO 1: Gere o executável
 Execute o arquivo: `gerar_executavel.bat`
 
-### PASSO 3: Use!
-Execute `dist/Relatorio_Fiscal.exe` em qualquer PC Windows
+### PASSO 2: Use!
+Execute como Administrador `dist/Relatorio_Fiscal.exe` em qualquer PC Windows
 
 ---
 
@@ -33,7 +27,6 @@ Execute `dist/Relatorio_Fiscal.exe` em qualquer PC Windows
 | `requirements.txt` | Dependências Python |
 | `gerar_executavel.bat` | Script para gerar o .exe |
 | `MANUAL.md` | Manual completo detalhado |
-| `CONFIGURACAO.txt` | Guia de configuração rápida |
 | `README.md` | Este arquivo |
 
 ---
@@ -63,21 +56,6 @@ Consulte o **MANUAL.md** para:
 - Solução de problemas comuns
 - Configurações avançadas
 - Exemplos práticos
-
----
-
-## 📝 EXEMPLO DE USO
-
-```
-PC: CAIXA01
-Banco: VendasDB
-
-Resultado da detecção automática:
-✓ Servidor: CAIXA01
-✓ Banco: VendasDB
-✓ Conexão: CAIXA01\VendasDB
-✓ Arquivo gerado: Loja Centro - 12.345.678-0001-99.xlsx
-```
 
 ---
 
