@@ -4,6 +4,9 @@ from pathlib import Path
 import os
 import sys
 from datetime import datetime
+from dotenv import load_dotenv
+# Carrega variáveis de ambiente do arquivo .env
+load_dotenv()
 
 def conectar_banco():
     """
@@ -14,12 +17,12 @@ def conectar_banco():
         # Detecta automaticamente o nome do computador
         server = os.environ.get('COMPUTERNAME', 'localhost')
         
-        # CONFIGURAÇÃO DO BANCO - AJUSTE APENAS ESTAS LINHAS
-        database = 'MISTERCHEFNET'   # Nome do banco de dados
+        # CONFIGURAÇÃO DO BANCO - Carrega do arquivo .env
+        database = os.getenv('DB_NAME')
         
-        # Para autenticação SQL Server (opcional)
-        username = 'sa' 
-        password = 'MISTERCHEFNET'
+        # Para autenticação SQL Server (opcional) - Carrega do arquivo .env
+        username = os.getenv('USER') 
+        password = os.getenv('PASSWORD')
         
         print(f"Tentando conectar ao servidor: {server}")
         print(f"Banco de dados: {database}")
@@ -369,4 +372,3 @@ ORDER BY e.subgrupo, e.[nome produto],e.cod_ncm, cod_cest
 
 if __name__ == "__main__":
     main()
-
